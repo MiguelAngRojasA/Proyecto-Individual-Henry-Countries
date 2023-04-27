@@ -23,7 +23,7 @@ function onSearch(){
       <Routes>
         <Route exact path="/" element={<Landing/>}></Route>
         <Route path="/home" element={<Home/>}></Route>
-        <Route path="/detail" element={<Detail/>}></Route>
+        <Route path="/detail/:id" element={<Detail/>}></Route>
         <Route path="/create" element={<Form/>}></Route>
       </Routes>
     </div>

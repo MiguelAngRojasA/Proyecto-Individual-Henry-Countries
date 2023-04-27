@@ -18,7 +18,7 @@ function getAllCountries(req, res) {
 async function getCountryById(req, res) {
   try {  
     const { id } = req.params;
-    const country = await CountryData.findOne({
+    const country = await CountryData.findAll({
       where: {
         id,
       },

@@ -36,8 +36,6 @@ export default function Card(props) {
 //     onClose(id);
 //     dispatch(removeFav(id));//   }
 
-
-
   return (
     <div className={style.card}>
       
