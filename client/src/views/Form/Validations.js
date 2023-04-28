@@ -21,6 +21,10 @@ export default function validation(inputs) {
   if (!inputs.season) {
     errors.season = "A season is required";
   } 
+  
+  if (inputs.countryId.length===0) {
+    errors.countryId = "At least one country is required";
+  }
   if (!maxCaracters.test(inputs.name)) {
     errors.name = "The name of the activity cannot be longer than 35 characters";
   } 

@@ -4,7 +4,13 @@ const STATUS_ERROR = 404;
 
 function getAllCountries(req, res) {
   try { 
-    CountryData.findAll().then((countries) => {
+    CountryData.findAll({
+      include: {
+        model: Activity,
+        attributes: ["id", "name", "dificulty", "duration", "season"],
+        through: { attributes: [] },
+      }
+    }).then((countries) => {
       if (countries) {
         res.status(STATUS_OK).json(countries);
       } else {

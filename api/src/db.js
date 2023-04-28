@@ -64,17 +64,20 @@ async function savaCountriesInDataBase() {
 
     console.log(country.length)
     // Guarda cada país en la base de datos
-    for (let i=0; i<country.length ;i++ ) {      
-
+    for (let i = 0; i < country.length; i++) {
+      const { cca3, name, flags, capital, continents, subregion, area, population } = country[i];
+    
+      const countryName = name.nativeName?.spa?.common || name.common || "No name found";
+      
       await CountryData.create({
-        id:country[i].cca3,
-        name: country[i].name.common,
-        image: country[i].flags.png,
-        capital: country[i].capital ? country[i].capital[0] : "",
-        continent:country[i].continents.join(""),
-        subregion: country[i].subregion,
-        area: country[i].area,
-        population: country[i].population,
+        id: cca3,
+        name: countryName,
+        image: flags.png,
+        capital: capital?.[0] || "No capital found",
+        continent: continents?.join("") || "No continent found",
+        subregion: subregion || "No subregion found",
+        area,
+        population,
       });     
     }
     console.log("Todos los países se han guardado en la base de datos.");

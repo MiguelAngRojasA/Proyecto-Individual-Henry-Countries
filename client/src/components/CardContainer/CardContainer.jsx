@@ -6,15 +6,16 @@ import { useSelector } from "react-redux";
 export default function CardContainer() {
   
   //const { numPage } = useSelector((state) => state);
+  
 
-  const {countries} = useSelector((state) => state);
+  const {countryDisplayed} = useSelector((state) => state);
 
   return (    
     (
       <div>
         <div className={style.cards_container}>
-          {countries &&
-            countries.map((element) => {
+          {countryDisplayed &&
+            countryDisplayed.map((element) => {
               return (
                 <Card
                   key={element.id}

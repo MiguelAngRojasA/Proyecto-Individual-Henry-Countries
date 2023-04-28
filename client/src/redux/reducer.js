@@ -1,50 +1,81 @@
-import {   
-    ADD_COUNTRIES,    
-    ADD_LOCATION,
-    GET_COUNTRIES,
-    GET_COUNTRY_DETAIL, 
-    CLEAR_COUNTRY,   
-  } from "./actions/types";
+import {
+  ADD_ACTIVITY,
+  ADD_LOCATION,
+  GET_COUNTRIES,
+  GET_COUNTRY_DETAIL,
+  CLEAR_COUNTRY,
+  GET_COUNTRY_BY_NAME,
+  UPDATE_COUNTRY_DISPLAY,
+  GET_ACTIVITIES,  
+} from "./actions/types";
 
 const initialState = {
   location: [],
   countries: [],
   activities: [],
-  country:[],
+  country: [],
+  countryDisplayed: [],
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
-                                                     //destructuring of an action
+  //destructuring of an action
   switch (type) {
     case ADD_LOCATION:
       return {
         ...state,
         location: [...state.location, payload],
       };
-      case GET_COUNTRIES:
+    case GET_COUNTRIES:
       if (Array.isArray(payload)) {
-        
         return {
-          ...state,         
+          ...state,
           countries: [...payload],
+          countryDisplayed: [...payload],
         };
-      } 
+      }
       break;
-      case GET_COUNTRY_DETAIL:        
+      case GET_ACTIVITIES:
         if (Array.isArray(payload)) {
-            
           return {
-            ...state,         
-            country: [...payload],
+            ...state,           
+        activities: [...payload],
           };
-        } 
+        }
         break;
-        case CLEAR_COUNTRY:
+    case GET_COUNTRY_DETAIL:
+      if (Array.isArray(payload)) {
+        return {
+          ...state,
+          country: [...payload],
+        };
+      }
+      break;
+    case CLEAR_COUNTRY:
       return {
         ...state,
         country: [],
       };
-      default:
-        return state;
+    case ADD_ACTIVITY:
+      return {
+        ...state,
+        activities: [...state.activities, payload],
+      };
+    case GET_COUNTRY_BY_NAME:
+      if (Array.isArray(payload)) {
+        return {
+          ...state,
+          countryDisplayed: [...payload],
+        };
+      }
+      break;
+
+    case UPDATE_COUNTRY_DISPLAY:
+      return {
+        ...state,
+        countryDisplayed: [...payload],
+      };    
+
+    default:
+      return state;
   }
 }

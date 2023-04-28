@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './NavBar.module.css'
 import { Link } from 'react-router-dom'
+import SearchBar from '../SearchBar/SearchBar';
 
 export default function NavBar({ onSearch, logout }) {
     return (
@@ -11,8 +12,8 @@ export default function NavBar({ onSearch, logout }) {
           </Link>
           <Link to="/create">
             <button>Create new Activity</button>
-          </Link>         
-          
+          </Link>
+          <SearchBar></SearchBar>        
     
           <button onClick={logout} >LogOut</button>
         </div>

@@ -3,8 +3,8 @@ const STATUS_OK = 200;
 const STATUS_ERROR = 404;
 
 async function addActivities(req, res) {
-  const { id, name, dificulty, duration, season, countryId } = req.body;
-  try {
+  const { id, name,description, dificulty, duration, season, countryId } = req.body;
+  try {    
     if (!id || !name || !dificulty || !season) {
       return res
         .status(STATUS_ERROR)
@@ -13,6 +13,7 @@ async function addActivities(req, res) {
     const activity = {
       id,
       name,
+      description,
       dificulty,
       duration,
       season,
@@ -69,7 +70,7 @@ async function deleteActivity(req, res) {
   }
 }
 async function updateActivity(req, res) {
-  const { id, name, dificulty, duration, season } = req.body;
+  const { id, name,description, dificulty, duration, season } = req.body;
   try {
     if (!id) {
       return res.status(STATUS_ERROR).json({ message: "ID is missing" });
@@ -80,6 +81,7 @@ async function updateActivity(req, res) {
     }
     const updatedActivity = await activity.update({
       name,
+      description,
       dificulty,
       duration,
       season,

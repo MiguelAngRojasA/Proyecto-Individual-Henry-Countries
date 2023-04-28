@@ -1,0 +1,39 @@
+.detail {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding:60px;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    height: 80vh;
+
+  }
+  
+  .detail img{
+      width: 50%;
+      height: 70vh;
+      max-width: 600px;
+  }
+
+  .tittle{
+    font-family: 'Get Schwifty', cursive;
+    font-size: 4rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffd700;
+    text-shadow: 2px 2px #6f8eb6;
+    text-align: center;
+
+  }
+
+  .sub_tittle{
+    font-family: 'Get Schwifty', cursive;
+    font-size: 4rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffd700;
+    text-shadow: 2px 2px #6f8eb6;
+    text-align: center;
+
+  }
