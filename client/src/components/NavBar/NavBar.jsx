@@ -13,7 +13,15 @@ export default function NavBar({ onSearch, logout }) {
           <Link to="/create">
             <button>Create new Activity</button>
           </Link>
-          <SearchBar></SearchBar>        
+
+          <Link to="/edit">
+            <button>Edit Activity</button>
+          </Link>
+          <SearchBar></SearchBar> 
+
+          <Link to="/about">
+            <button>About</button>
+          </Link>       
     
           <button onClick={logout} >LogOut</button>
         </div>

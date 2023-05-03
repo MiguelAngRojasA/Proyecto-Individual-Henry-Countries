@@ -34,10 +34,11 @@ async function getCountryById(req, res) {
         through: { attributes: [] },
       },
     });
-    if (country) {
-      res.status(200).json(country);
-    } else {
+    if (country.length === 0) {
       res.status(STATUS_ERROR).json({ message: "Country not found" });
+      
+    } else {
+      res.status(200).json(country);
     }
   } catch (error) {
     res.status(STATUS_ERROR).json({ message: error });
@@ -66,8 +67,16 @@ async function getCountryByName(req, res) {
     res.status(STATUS_ERROR).json({ message: error });
   }
 }
+function routeNotfound(req, res, next){  
+    const error = new Error(`La ruta ${req.path} no existe`);
+    error.status = STATUS_ERROR;
+    next(error);  
+
+
+}
 module.exports = {
   getAllCountries,
   getCountryById,
   getCountryByName,
+  routeNotfound
 };

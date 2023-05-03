@@ -1,4 +1,4 @@
-import { Home, Landing, Detail, Form } from "./views/index.js";
+import { Home, Landing, Detail, Form, FormEdit } from "./views/index.js";
 import { NavBar } from "./components/index.js";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
@@ -25,6 +25,7 @@ function onSearch(){
         <Route path="/home" element={<Home/>}></Route>
         <Route path="/detail/:id" element={<Detail/>}></Route>
         <Route path="/create" element={<Form/>}></Route>
+        <Route path="/edit" element={<FormEdit/>}></Route>
       </Routes>
     </div>
   );

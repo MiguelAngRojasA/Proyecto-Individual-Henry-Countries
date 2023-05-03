@@ -1,0 +1,73 @@
+.page {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    display: flex;
+justify-content: center;
+align-items: center;
+  }
+  
+  .page button {
+    margin-right: 5px;
+    border: none;
+    background-color: #e0e0e0;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .page button:hover {
+    background-color: #d0d0d0;
+  }
+  
+  
+  
+  .page .active {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  .numbers {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+  }
+  
+  span {
+    margin: 0 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: blue;
+    cursor: pointer;
+  }
+  
+  span:hover {
+    text-decoration: underline;
+  }
+ 
+  .page p.active {
+    background-color: #3f51b5;
+    color: white;
+  }
+
+  .page ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .page li {
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .page li.active {
+    background-color: #3f51b5;
+    color: white;
+  }

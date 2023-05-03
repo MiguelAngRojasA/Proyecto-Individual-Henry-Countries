@@ -6,7 +6,11 @@ import {
   GET_COUNTRY_BY_NAME, 
   CLEAR_COUNTRY,
   GET_ACTIVITIES,
-  UPDATE_COUNTRY_DISPLAY,  
+  UPDATE_COUNTRY_DISPLAY,
+  PREV_PAGE, 
+  NEXT_PAGE,
+  HANDLE_NUMBER,
+  FAILURE, 
 } from "./types";
 import axios from "axios";
 
@@ -28,6 +32,7 @@ export function getCountries() {
         payload: data,
       });
     } catch (error) {
+      alert(error.response.data.message)
       throw new Error("Data countries not found", error.message);
     }
   };
@@ -42,6 +47,7 @@ export function getCountryDetail(id) {
         payload: data,
       });
     } catch (error) {
+      alert(error.response.data.message)
       throw new Error("Data country not found", error.message);
     }
   };
@@ -72,8 +78,42 @@ export function addActivities(activity) {
       
       
     } catch (error) {
-      alert(error)
+      alert(error.response.data.message)
       throw new Error("activity not charged", error);
+      
+    }
+  };
+}
+
+export function editActivities(activity) {
+  return async function () {
+    try {     
+      const activityid= activity.id     
+            const { data } = await axios.put(`http://localhost:3001/activities/${activityid}`, {
+        ...activity,        
+      });      
+     
+      alert("the activity was edited")      
+      
+    } catch (error) {
+      alert(error.response.data.message)
+      throw new Error("activity not charged", error);
+      
+    }
+  };
+}
+
+export function deleteActivity(id) {
+  return async function () {
+    try {   
+         const { data } = await axios.delete(`http://localhost:3001/activities/${id}`              
+      );      
+     
+      alert("the activity was eliminated")      
+      
+    } catch (error) {
+      alert(error.response.data.message)
+      throw new Error("id not charged", error);
       
     }
   };
@@ -87,7 +127,9 @@ export function getActivities() {
         payload: data,
       });
     } catch (error) {
+      alert(error.message)
       throw new Error("Data countries not found", error.message);
+      
     }
   };
 }
@@ -101,7 +143,10 @@ export function getCountryByName(countryName) {
         payload: data,
       });
     } catch (error) {
-      throw new Error("Data country not found", error.message);
+      dispatch({
+        type: FAILURE,
+        payload: error.response.data.message,
+      });
     }
   };
 }
@@ -118,10 +163,11 @@ export const alphabeticOrder = (order) => {
     const countries = getState().countryDisplayed;
 
     const newOrder = countries.sort((a, b) => {
-      if (a.id > b.id) {
+      const compareResult = a.name.localeCompare(b.name, 'en', {sensitivity: 'base'});
+      if (compareResult > 0) {
         return order === "A-Z" ? 1 : -1;
       }
-      if (a.id < b.id) {
+      if (compareResult < 0) {
         return order === "Z-A" ? 1 : -1;
       }
       return 0;
@@ -147,20 +193,56 @@ export const populationOrder = (order) => {
   };
 };
 
-export const continentOrder = (order) => {
+export const continentOrder = (continent, activityName) => {
   return (dispatch, getState) => {    
-      const countries = getState().countries;
-      const filteredCountries = countries.filter((country) => country.continent === order);
+    let filteredCountries = getState().countries;
+    
+    if (continent) {
+      filteredCountries = filteredCountries.filter(country => country.continent === continent);
+    }
+
+    if (activityName) {
+      filteredCountries = filteredCountries.filter(country => {
+        return country.Activities.some(Activity => Activity.name.toLowerCase().includes(activityName.toLowerCase()))
+      });
+    }
+
     dispatch({ type: UPDATE_COUNTRY_DISPLAY, payload: filteredCountries });
   };
 };
 
 export const activityOrder = (name) => {
   return (dispatch, getState) => {
-    const countries = getState().countries;
-    const filteredCountries = countries.filter(country => {
-      return country.Activities.some(Activity => Activity.name.toLowerCase().includes(name.toLowerCase()))
-    });
+    const { selectedContinent } = getState();
+    let filteredCountries = [];
+
+    if (name) {
+      filteredCountries = getState().countries.filter(country => {
+        return country.Activities.some(Activity => Activity.name.toLowerCase().includes(name.toLowerCase()))
+      });
+    }
+
+    if (selectedContinent) {
+      filteredCountries = filteredCountries.filter(country => country.continent === selectedContinent);
+    }
     dispatch({ type: UPDATE_COUNTRY_DISPLAY, payload: filteredCountries });
   };
 };
+
+export function prevPage() {
+  return {
+    type: PREV_PAGE,
+  };
+}
+
+export function nextPage() {
+  return {
+    type: NEXT_PAGE,
+  };
+}
+export function handleNumber(num) {
+  return {
+    type: HANDLE_NUMBER,
+    payload: num,
+  };
+}

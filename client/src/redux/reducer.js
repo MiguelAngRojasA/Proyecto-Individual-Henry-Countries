@@ -6,15 +6,23 @@ import {
   CLEAR_COUNTRY,
   GET_COUNTRY_BY_NAME,
   UPDATE_COUNTRY_DISPLAY,
-  GET_ACTIVITIES,  
+  GET_ACTIVITIES,
+  PREV_PAGE, 
+  NEXT_PAGE,
+  HANDLE_NUMBER, 
+  FAILURE  
 } from "./actions/types";
 
 const initialState = {
   location: [],
-  countries: [],
+  countries: [], 
   activities: [],
-  country: [],
+  country: [], // used for country detail 
   countryDisplayed: [],
+  numPage: 1,
+  error: {
+    countryNotFound: "",
+  }
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -31,6 +39,9 @@ export default function rootReducer(state = initialState, { type, payload }) {
           ...state,
           countries: [...payload],
           countryDisplayed: [...payload],
+          error: {
+            countryNotFound: "",            
+          },
         };
       }
       break;
@@ -47,6 +58,9 @@ export default function rootReducer(state = initialState, { type, payload }) {
         return {
           ...state,
           country: [...payload],
+          error: {
+            countryNotFound: "",            
+          },
         };
       }
       break;
@@ -65,15 +79,45 @@ export default function rootReducer(state = initialState, { type, payload }) {
         return {
           ...state,
           countryDisplayed: [...payload],
+          error: {
+            countryNotFound: "",            
+          },
         };
       }
       break;
 
     case UPDATE_COUNTRY_DISPLAY:
+      
       return {
         ...state,
         countryDisplayed: [...payload],
-      };    
+      }; 
+      
+      case HANDLE_NUMBER:
+      return {
+        ...state,
+        numPage: payload,
+      };
+    case NEXT_PAGE:
+      return {
+        ...state,
+        numPage: state.numPage + 1,
+      };
+    case PREV_PAGE:
+      return {
+        ...state,
+        numPage: state.numPage - 1,
+      };
+      
+      case FAILURE:
+      
+      return {
+        ...state,
+        error: {
+          ...state.error,
+          countryNotFound: payload,
+        },
+      }
 
     default:
       return state;
