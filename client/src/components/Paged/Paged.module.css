@@ -5,20 +5,27 @@
     display: flex;
 justify-content: center;
 align-items: center;
+
+color: #ffffff;
   }
   
   .page button {
-    margin-right: 5px;
+    background-color: #0084ff;
     border: none;
-    background-color: #e0e0e0;
-    padding: 5px;
+    border-radius: 8px;
+    color: #ffffff;
     cursor: pointer;
+    font-size: 15px;
+    margin-right: 1px; 
+    padding: 10px;
+    width: 90px;
+    transition: background-color 0.3s ease;
   }
   
   .page button:hover {
-    background-color: #d0d0d0;
+    color: #dfe222;
+    background-color: #0f00e6;
   }
-  
   
   
   .page .active {
@@ -46,7 +53,7 @@ align-items: center;
   }
  
   .page p.active {
-    background-color: #3f51b5;
+    background-color: #0f00e6;
     color: white;
   }
 

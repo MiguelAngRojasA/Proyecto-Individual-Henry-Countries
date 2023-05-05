@@ -1,0 +1,30 @@
+.image {
+    width: 50%;
+    justify-content: center;   
+    border-radius: 20px;  
+
+  }
+
+.errorContainer{
+    display: flex;
+    justify-content: center;
+    align-content: flex-end;   
+    width: 80%;
+    height: 90%;     
+    text-align: center;
+    align-items: center;
+    background-color: #1560a5;
+    border-radius: 40px;   
+    flex-direction: column;
+    padding-bottom: 10px; 
+    border: 2px solid white;
+
+}
+
+.errorContainer h1 {
+  font-size: 3rem;  
+  line-height: 1.8;
+  text-align: center;
+  width: 100%;
+  color: #fefeff;
+} 

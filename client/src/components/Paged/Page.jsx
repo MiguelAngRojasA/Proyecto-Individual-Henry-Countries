@@ -29,7 +29,7 @@ const end = start + 9 > cantPages ? cantPages : start + 9;
 // Agrega los números a la lista numbers
 for (let i = start; i <= end; i++) {
   numbers.push(
-    <li className={numPage === i ? style.active : null} onClick={() => handleClickNumber(i)}>{i}</li>
+    <li key={i} className={numPage === i ? style.active : null} onClick={() => handleClickNumber(i)}>{i}</li>
   );
 }
 

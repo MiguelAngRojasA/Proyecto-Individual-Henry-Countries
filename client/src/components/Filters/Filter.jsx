@@ -7,6 +7,7 @@ import {
   getCountries,
   activityOrder,
 } from "../../redux/actions/actions";
+import style from "./Filter.module.css"
 
 export default function Filter() {
   const { activities } = useSelector((state) => state);
@@ -48,7 +49,8 @@ export default function Filter() {
     document.getElementById("activity-selector").selectedIndex = 0;
   }
   return (
-    <div>
+    <div className={style.filterContainer}>
+      <label> Filter by name: </label>
       <select
         id="alphabetic-selector"
         onChange={handleAlphabeticOrder}
@@ -61,6 +63,7 @@ export default function Filter() {
         <option value="A-Z">A-Z</option>
         <option value="Z-A">Z-A</option>
       </select>
+      <label> Filter by population: </label>
       <select
         id="population-selector"
         onChange={handlePopulationOrder}
@@ -73,6 +76,7 @@ export default function Filter() {
         <option value="Ascendente">Ascendente</option>
         <option value="Descendente">Descendente</option>
       </select>
+      <label> Filter by continent: </label>
       <select
         id="continent-selector"
         onChange={handleContinentOrder}
@@ -80,7 +84,7 @@ export default function Filter() {
         defaultValue={"DEFAULT"}
       >
         <option value="DEFAULT" disabled={true}>
-          Select Filter
+          Select continent
         </option>
         <option value="Africa">Africa</option>
         <option value="Antarctica">Antarctica</option>
@@ -90,6 +94,7 @@ export default function Filter() {
         <option value="South America">South America</option>
         <option value="Oceania">Oceania</option>
       </select>
+      <label> Filter by activity: </label>
       <select
         id="activity-selector"
         name="activity"
@@ -105,7 +110,7 @@ export default function Filter() {
           </option>
         ))}
       </select>
-
+      <label> Clear all filters: </label>
       <button onClick={resetBtton}>Reset</button>
     </div>
   );

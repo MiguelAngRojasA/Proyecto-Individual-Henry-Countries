@@ -1,11 +1,75 @@
 .nav {
-    border: 2px solid #354e5c;
-    border-radius: 4px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 2px;
-    padding: 10px;
-    background-color: #000000;
-    height: 6vh;
-  }
+  background-color: #000000;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px; 
+  top: 0;
+  width: 100%; 
+  z-index: 1;
+  align-items: center;
+  overflow-x: auto;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.nav button {
+  background-color: #0084ff;
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 15px;
+  margin-right: 1px; 
+  padding: 10px;
+  width: 90px;
+  transition: background-color 0.3s ease;
+}
+
+.nav button:hover {
+  color: #dfe222;
+  background-color: #0f00e6;
+}
+
+.nav .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav .search {
+  margin-left: auto;
+}
+
+.nav .search input {
+  background-color: #222;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-right: 1rem;
+}
+
+.nav .search input:focus { 
+  box-shadow: 0 0 0 2px #4caf50;
+}
+
+.nav a {
+  color: #ffffff;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+
+.logo{ 
+  width: 100%;
+  height: 50%;
+  border-radius: 100px;
+}
+
+.imgcontainer{
+  width: 8%;
+}

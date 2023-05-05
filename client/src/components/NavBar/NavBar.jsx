@@ -2,33 +2,36 @@ import React from 'react'
 import style from './NavBar.module.css'
 import { Link } from 'react-router-dom'
 import SearchBar from '../SearchBar/SearchBar';
+import icon  from'../../media/icon .png'
 
-export default function NavBar({ onSearch, logout }) {
-    return (
-        <div className={style.nav}>
-          
-          <Link to="/home">
-            <button >Home</button>
-          </Link>
-          <Link to="/create">
-            <button>Create new Activity</button>
-          </Link>
+export default function NavBar() {
+  return (
+    <div className={style.nav}>
 
-          <Link to="/edit">
-            <button>Edit Activity</button>
-          </Link>
-          <SearchBar></SearchBar> 
+      <div className={style.imgcontainer} >
+      <img className={style.logo} src={icon} alt="web logo"></img>
+      </div>
+      <Link to="/home">
+        <button>Home</button>
+      </Link>
+      <Link to="/create">
+        <button>Create Activity</button>
+      </Link>
 
-          <Link to="/about">
-            <button>About</button>
-          </Link>       
-    
-          <button onClick={logout} >LogOut</button>
-        </div>
-      );
+      <Link to="/edit">
+        <button>Edit Activity</button>
+      </Link>
+
+      <div className={style.searchContainer}>
+        <SearchBar></SearchBar>
+      </div>
+
+      <Link to="/about">
+        <button>About</button>
+      </Link>
+      <Link to="/">
+      <button>LogOut</button>
+      </Link>
+    </div>
+  );
 }
-// onClick={()=> dispatch(resetCharacters())}
-//onClick={logout}
-//<div><img className={style.logo} src={rick} alt="rick logo"></img></div>
-// onSearch={onSearch}
-//<SearchBar/>

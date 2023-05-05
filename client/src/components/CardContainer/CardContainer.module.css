@@ -2,9 +2,9 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    padding: 60px;
-    justify-content: space-around; 
-    gap: 1em;  
-  
+    padding: 80px;
+    justify-content: flex-start;
+    gap: 1em;
+    min-height: 65vh;  
     
-}
+  }
