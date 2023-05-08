@@ -30,7 +30,7 @@ async function getCountryById(req, res) {
       },
       include: {
         model: Activity,
-        attributes: ["id", "name", "dificulty", "duration", "season"],
+        attributes: ["id", "name","description", "dificulty", "duration", "season"],
         through: { attributes: [] },
       },
     });

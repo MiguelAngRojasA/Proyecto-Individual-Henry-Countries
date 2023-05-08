@@ -48,7 +48,7 @@ export default function Filter() {
     document.getElementById("continent-selector").selectedIndex = 0;
     document.getElementById("activity-selector").selectedIndex = 0;
   }
-  return (
+  return (    
     <div className={style.filterContainer}>
       <label> Filter by name: </label>
       <select

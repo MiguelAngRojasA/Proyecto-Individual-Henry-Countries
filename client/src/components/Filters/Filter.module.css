@@ -1,15 +1,19 @@
 .filterContainer{
-    background-color: #1667b3;
+    background-color: #000000;
     color: #ffffff;
     display: flex;   
     padding: 10px; 
     top: 0;
     flex-direction: column;
     align-items: stretch;
-    width: 250px;
+    width: 200px;
     height: 650px;
-    border-radius: 5px;
+    border: 2px solid rgba(147, 138, 144, 0.876);
+    
+   
 }
 .filterContainer * {
     padding: 15px;
   }
+  
+  

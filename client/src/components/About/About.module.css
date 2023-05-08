@@ -1,23 +1,23 @@
 .backgroundImage {
-    background-image: url("../../media/activitie.jpg");
-    background-size: cover;
-    background-position: center;
-  }
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;  
-    flex-direction: row-reverse;
-    align-items: center;
-    justify-content: space-evenly;
-    padding-bottom: 50px;    
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-  }
-  .title {
+  background-image: url("../../media/activitie.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-bottom: 50px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.title {
   background-color: #0329a79c;
   width: 100%;
   height: 50px;
@@ -28,8 +28,8 @@
   color: aliceblue;
 }
 
-.aboutcontainer{
-  width: 50%; 
+.aboutcontainer {
+  width: 50%;
   background-color: #21357569;
   padding: 20px;
   border-radius: 20px;
@@ -37,71 +37,99 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  justify-content: space-around; 
+  justify-content: space-around;
   margin-top: 20px;
   margin-bottom: 20px;
-
 }
 
 .divsection {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    padding-bottom: 5px;
-    padding-top: 10px;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-color: #21357569;
-    border: 2px solid rgba(147, 138, 144, 0.876);
-    padding-left: 5px;
-    padding-right: 5px;
-    color: azure;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 5px;
+  padding-top: 10px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #21357569;
+  border: 2px solid rgba(147, 138, 144, 0.876);
+  padding-left: 5px;
+  padding-right: 5px;
+  color: azure;
+}
 
-  }
+.space {
+  height: 20px;
+  width: 100%;
+}
 
-  .space {
-    height: 20px;
-    width: 100%;
-  }
+.divsection h2 {
+  text-align: center;
+  color: azure;
+}
+.divsection h4 {
+  text-align: justify;
+  color: azure;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.iconContainer {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+}
+.iconContainer img {
+  height: 50px;
+  width: 50px;
+}
+.tecnologiesContainer {
+  background-color: #0329a79c;
+  border: 2px solid rgba(147, 138, 144, 0.876);
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  color: aliceblue;
+  border-radius: 20px;
+}
 
-  .divsection h2 {
-    text-align: center;
-    color: azure;
-  }
-  .iconContainer{
-    padding-top: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;  
-    width: 100px;
-  }
-  .iconContainer img{
-    height: 50px;
-    width: 50px;
+.iconContainerlargue img {
+  height: 50px;
+  width: 90px;
+}
 
-  }
-  .tecnologiesContainer{
-    background-color: #0329a79c;     
-    border: 2px solid rgba(147, 138, 144, 0.876);
-    display: flex;
-    justify-content: space-evenly;   
-    flex-wrap: wrap;
-    color: aliceblue;
-    border-radius: 20px;
-    
-  }
+.iconContainerlargue {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+}
 
-  .iconContainerlargue img{
-    height: 50px;
-    width: 90px;
-    }
+.imgContainer {
+  height: 80px;
+  width: 90px;
+}
+.imgagenetwork {
+  height: 100%;
+  width: 100%;
+}
 
-    .iconContainerlargue{
-        padding-top: 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;  
-        width: 100px;
-      }
+.imgagesContainer {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.imgContainergit{
+  height: 80px;
+  width: 130px;
+
+}
+.imgContainer:hover,.imgContainergit:hover,.iconContainerlargue:hover,.iconContainer:hover{
+  scale: 1.1;
+
+}

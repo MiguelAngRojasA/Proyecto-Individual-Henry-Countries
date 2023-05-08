@@ -9,9 +9,6 @@ import Paginate from "../../components/Paged/Page";
 import video from '../../media/Home.mp4';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.jsx'
 
-
-
-
 export default function Home() {
 
   const dispatch = useDispatch();  

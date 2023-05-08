@@ -1,15 +1,15 @@
 import React from "react";
 import style from "./About.module.css";
-import html from '../../media/htmlicon.png'
-import css from '../../media/cssicon.png'
-import react from '../../media/reacticon.png'
-import redux from '../../media/reduxicon.png'
-import node from '../../media/nodeicon.png'
-import express from '../../media/expressicon.png'
-import seq from '../../media/seqicon.png'
-import post from '../../media/posticon.png'
-
-
+import html from "../../media/htmlicon.png";
+import css from "../../media/cssicon.png";
+import react from "../../media/reacticon.png";
+import redux from "../../media/reduxicon.png";
+import node from "../../media/nodeicon.png";
+import express from "../../media/expressicon.png";
+import seq from "../../media/seqicon.png";
+import post from "../../media/posticon.png";
+import linkedin from "../../media/linkedin.png";
+import github from "../../media/GitHub.png";
 
 
 export default function About() {
@@ -35,7 +35,7 @@ export default function About() {
             <li>Learn and practice GIT workflow.</li>
             <li>Use and practice testing.</li>
 
-            <h2>🛠️ Technologies Used 🛠️</h2>          
+            <h2>🛠️ Technologies Used 🛠️</h2>
             <div className={style.tecnologiesContainer}>
               <div></div>
               <div className={style.iconContainer}>
@@ -70,7 +70,30 @@ export default function About() {
                 <img src={post} alt="posticon" />
                 <h3>PostgreSQL</h3>
               </div>
-            </div>                     
+            </div>
+            <h2>👨‍🏫 About me 👨‍🏫</h2>
+            <h4>
+              As an Industrial Engineer and junior programmer, I
+              bring a positive attitude, eagerness to learn, and self-taught
+              skills. I have a good character, discipline, sense of belonging,
+              ethical commitment, and sense of responsibility. I'm skilled in
+              teamwork, building personal relationships, and problem-solving and I
+              have a willingness to acquire more knowledge to be able to perform
+              an excellent professional work.
+            </h4>
+            <div className={style.imgagesContainer}>
+              <div className={style.imgContainer}>
+              <a href="https://www.linkedin.com/in/miguel-angel-rojas-aroca-674695b3/">
+              <img className={style.imgagenetwork} src={linkedin} alt="clinkedinicon" />
+              </a> 
+            </div>
+            <div className={style.imgContainergit}>
+              <a href="https://github.com/MiguelAngRojasA">
+            <img className={style.imgagenetwork} src={github} alt="clinkedinicon"  />
+           </a> 
+           </div>
+            </div>
+            
           </div>
         </div>
       </div>

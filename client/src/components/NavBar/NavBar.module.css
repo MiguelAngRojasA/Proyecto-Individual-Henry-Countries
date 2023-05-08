@@ -1,16 +1,15 @@
 .nav {
-  background-color: #000000;
+  background-color: #1D438A;
   color: #ffffff;
   display: flex;
   justify-content: space-between;
-  padding: 10px; 
-  top: 0;
   width: 100%; 
   z-index: 1;
   align-items: center;
   overflow-x: auto;
   margin: 0;
   box-sizing: border-box;
+  border: 2px solid rgba(147, 138, 144, 0.876);
 }
 
 .nav button {
@@ -21,8 +20,7 @@
   cursor: pointer;
   font-size: 15px;
   margin-right: 1px; 
-  padding: 10px;
-  width: 90px;
+  padding: 10px;  
   transition: background-color 0.3s ease;
 }
 

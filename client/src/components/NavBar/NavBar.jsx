@@ -11,6 +11,11 @@ export default function NavBar() {
       <div className={style.imgcontainer} >
       <img className={style.logo} src={icon} alt="web logo"></img>
       </div>
+
+      <div className={style.searchContainer}>
+        <SearchBar></SearchBar>
+      </div>
+
       <Link to="/home">
         <button>Home</button>
       </Link>
@@ -21,17 +26,15 @@ export default function NavBar() {
       <Link to="/edit">
         <button>Edit Activity</button>
       </Link>
-
-      <div className={style.searchContainer}>
-        <SearchBar></SearchBar>
-      </div>
-
+      
       <Link to="/about">
         <button>About</button>
       </Link>
       <Link to="/">
       <button>LogOut</button>
       </Link>
+
+      
     </div>
   );
 }

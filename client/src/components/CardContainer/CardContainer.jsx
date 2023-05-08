@@ -1,6 +1,7 @@
 import Card from "../Card/Card";
 import style from "./CardContainer.module.css";
 import { useSelector } from "react-redux";
+import ErrorMessage from '../ErrorMessage/ErrorMessage'
 
 export default function CardContainer() {
  
@@ -29,7 +30,7 @@ export default function CardContainer() {
           })}
         </div>
       ) : (
-        <p>No se encontraron resultados</p>
+        <ErrorMessage errorMessage="Country not found" />  
       )}
     </div>
   )

@@ -1,4 +1,4 @@
-import { Home, Landing, Detail, Form, FormEdit,About,PageNotFound} from "./views/index.js";
+import { Home, Landing, Detail, Form, FormEdit,About,ErrorMessage} from "./views/index.js";
 import { NavBar } from "./components/index.js";
 import { useLocation } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
@@ -20,7 +20,7 @@ function App() {
         <Route path="/create" element={<Form/>}></Route>
         <Route path="/edit" element={<FormEdit/>}></Route>
         <Route path="/about" element={<About/>}></Route>
-        <Route path="*" element={<PageNotFound/>} />
+        <Route path="*" element={<ErrorMessage errorMessage="PageNotFound"/>} />
       </Routes>
     </div>
   );
