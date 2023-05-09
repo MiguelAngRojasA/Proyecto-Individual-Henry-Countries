@@ -26,7 +26,7 @@ export function addLocation(path) {
 export function getCountries() {
   return async function (dispatch) {
     try {
-      const { data } = await axios.get(`http://localhost:3001/countries/all`);
+      const { data } = await axios.get(`/countries/all`);
       return dispatch({
         type: GET_COUNTRIES,
         payload: data,
@@ -41,7 +41,7 @@ export function getCountries() {
 export function getCountryDetail(id) {
   return async function (dispatch) {
     try {
-      const { data } = await axios.get(`http://localhost:3001/countries/${id}`);
+      const { data } = await axios.get(`/countries/${id}`);
       return dispatch({
         type: GET_COUNTRY_DETAIL,
         payload: data,
@@ -64,7 +64,7 @@ export function addActivities(activity) {
     try {
       const state = getState();
       const activitiesLength = state.activities.length;
-      const { data } = await axios.post(`http://localhost:3001/activities`, {
+      const { data } = await axios.post(`/activities`, {
         ...activity,
         id: activitiesLength + 1,
       });
@@ -89,7 +89,7 @@ export function editActivities(activity) {
   return async function () {
     try {     
       const activityid= activity.id     
-            const { data } = await axios.put(`http://localhost:3001/activities/${activityid}`, {
+            const { data } = await axios.put(`/activities/${activityid}`, {
         ...activity,        
       });      
      
@@ -106,7 +106,7 @@ export function editActivities(activity) {
 export function deleteActivity(id) {
   return async function () {
     try {   
-         const { data } = await axios.delete(`http://localhost:3001/activities/${id}`              
+         const { data } = await axios.delete(`/activities/${id}`              
       );      
      
       alert("the activity was eliminated")      
@@ -121,7 +121,7 @@ export function deleteActivity(id) {
 export function getActivities() {
   return async function (dispatch) {
     try {
-      const { data } = await axios.get(`http://localhost:3001/activities/all`);
+      const { data } = await axios.get(`/activities/all`);
       return dispatch({
         type: GET_ACTIVITIES,
         payload: data,
@@ -137,7 +137,7 @@ export function getActivities() {
 export function getCountryByName(countryName) {
   return async function (dispatch) {
     try {
-      const { data } = await axios.get(`http://localhost:3001/countries/name?name=${countryName}`);
+      const { data } = await axios.get(`/countries/name?name=${countryName}`);
       return dispatch({
         type: GET_COUNTRY_BY_NAME,
         payload: data,
