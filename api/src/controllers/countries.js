@@ -18,7 +18,7 @@ function getAllCountries(req, res) {
       }
     });
   } catch (error) {
-    res.status(500).json({ message: error });
+    res.status(500).json({ message: error.message  });
   }
 }
 async function getCountryById(req, res) {
@@ -64,11 +64,11 @@ async function getCountryByName(req, res) {
     }
     res.status(200).json(countries); 
   } catch (error) {
-    res.status(STATUS_ERROR).json({ message: error });
+    res.status(STATUS_ERROR).json({ message: error.message });
   }
 }
 function routeNotfound(req, res, next){  
-    const error = new Error(`La ruta ${req.path} no existe`);
+    const error = new Error(`The route doesnt exist`);
     error.status = STATUS_ERROR;
     next(error);  
 

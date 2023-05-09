@@ -5,7 +5,7 @@ const STATUS_ERROR = 404;
 async function addActivities(req, res) {
   const { id, name,description, dificulty, duration, season, countryId } = req.body;
   try {    
-    if (!id || !name || !dificulty || !season) {
+    if (!id || !name || !dificulty || !season  || !countryId  || !duration ) {
       return res
         .status(STATUS_ERROR)
         .json({ message: "The require information is missing" });

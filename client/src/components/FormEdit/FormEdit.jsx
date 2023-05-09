@@ -37,7 +37,16 @@ export default function Form() {
   const [selectedActivityId, setSelectedActivityId] = useState("");
   useEffect(() => {
     setErrors(validation(ActivityData));
-  }, [ActivityData]);
+  }, [ActivityData,activities]);
+
+  useEffect(() => {
+    setActivityData((prevData) => {
+      return {
+        ...prevData,
+        activities,
+      };
+    });
+  }, [activities]);
 
   function handleChange(event) {
     const property = event.target.name;
@@ -121,9 +130,32 @@ export default function Form() {
     setCountrySelected(newCountrySelected);
   }
 
-  function handeActivityDelete() {
-    alert("la actividad a elimnar es " + selectedActivityId);
-    dispatch(deleteActivity(selectedActivityId));
+  function handeActivityDelete() {   
+    dispatch(deleteActivity(selectedActivityId));    
+
+    setActivityData({
+      id: "",
+      name: "",
+      description: "",
+      dificulty: "",
+      duration: "",
+      season: "",
+      countryId: [],
+    });
+    setErrors({
+      id: "",
+      name: "",
+      description: "",
+      dificulty: "",
+      duration: "",
+      season: "",
+      country: "",
+    });
+    setCountrySelected([]);
+    setSelectedActivityId("");
+    document.getElementById("country-selector").selectedIndex = 0;
+    document.getElementById("season-selector").selectedIndex = 0;
+    document.getElementById("activity-selector").selectedIndex = 0;
   }
   return (
     <div className={`${style.container} ${style.backgroundImage}`}>

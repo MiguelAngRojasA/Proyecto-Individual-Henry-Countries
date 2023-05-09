@@ -52,42 +52,43 @@ Activity.belongsToMany(CountryData, {
 });
 
 // Función para guardar todos los países en la base de datos
-async function savaCountriesInDataBase() {
+async function saveCountriesInDataBase() {
   try {
-
     const count = await CountryData.count();
-    //console.log("El numero de country es de "+ count )
+    //console.log (">>>>>>>>>>>>>>>>>>>>>>>>>",count)
 
-  if (count!== 250){
-    const answer = await axios.get("https://restcountries.com/v3.1/all");
-    const country = answer.data;
+    if (count !== 250) {
+      const answer = await axios.get("https://restcountries.com/v3.1/all");
+      const country = answer.data;    
 
-    console.log(country.length)
-    // Guarda cada país en la base de datos
-    for (let i = 0; i < country.length; i++) {
-      const { cca3, name, flags, capital, continents, subregion, area, population } = country[i];
-    
-      const countryName = name.nativeName?.spa?.common || name.common || "No name found";
-      
-      await CountryData.create({
-        id: cca3,
-        name: countryName,
-        image: flags.png,
-        capital: capital?.[0] || "No capital found",
-        continent: continents?.join("") || "No continent found",
-        subregion: subregion || "No subregion found",
-        area,
-        population,
-      });     
+      // Envuelve el bucle for en una función asincrónica
+      await Promise.all(
+        country.map(async (country) => {
+          const { cca3, name, flags, capital, continents, subregion, area, population } = country;
+
+          const countryName = name.nativeName?.spa?.common || name.common || "No name found";
+
+          await CountryData.create({
+            id: cca3,
+            name: countryName,
+            image: flags.png,
+            capital: capital?.[0] || "No capital found",
+            continent: continents?.join("") || "No continent found",
+            subregion: subregion || "No subregion found",
+            area,
+            population,
+          });
+        })
+      );
+
+      //console.log("Todos los países se han guardado en la base de datos.");
     }
-    console.log("Todos los países se han guardado en la base de datos.");
-  }    
-  } catch (error) {
-    console.error("Error al guardar los países en la base de datos:", error);
+  } catch (error) {   
+    console.error("Data countries not found:", error);
   }
 }
 // Llama la función para guardar todos los países en la base de datos al iniciar el servidor
-savaCountriesInDataBase();
+saveCountriesInDataBase();
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { CountryData, Activity } = require('./db.js');
