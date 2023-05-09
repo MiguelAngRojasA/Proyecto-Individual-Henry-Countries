@@ -54,8 +54,7 @@ Activity.belongsToMany(CountryData, {
 // Función para guardar todos los países en la base de datos
 async function saveCountriesInDataBase() {
   try {
-    const count = await CountryData.count();
-    //console.log (">>>>>>>>>>>>>>>>>>>>>>>>>",count)
+    const count = await CountryData.count(); 
 
     if (count !== 250) {
       const answer = await axios.get("https://restcountries.com/v3.1/all");
