@@ -5,12 +5,13 @@ const path = require("path");
 const { DATABASE_URL } = process.env;
 //  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_PORT}`, DB_USER, DB_PASSWORD, DB_HOST,DB_NAME,DB_PORT,
 const axios = require("axios");
+import * as pg from 'pg';
 
 const sequelize = new Sequelize(DATABASE_URL,
   {
     logging: false, // set to console.log to see the raw SQL queries
     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-    dialect: "postgres",
+    dialectModule: pg,
   }
 );
 const basename = path.basename(__filename);
