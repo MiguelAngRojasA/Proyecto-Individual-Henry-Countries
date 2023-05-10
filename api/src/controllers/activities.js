@@ -36,7 +36,7 @@ async function addActivities(req, res) {
 }
 function getActivities(req, res) {
   try {
-    //Para obtener todos las actividades de la tabla CountryData se usa el método findAll de Sequelize.
+   //FindAll method of Sequelize is used to get all the activities in the table
     Activity.findAll().then((activities) => {
       if (activities) {
         res.status(STATUS_OK).json(activities);

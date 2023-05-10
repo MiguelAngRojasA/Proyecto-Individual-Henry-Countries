@@ -8,8 +8,8 @@ const pg = require('pg');
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
   {
-    logging: false, // set to console.log to see the raw SQL queries
-    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+    logging: false, 
+    native: false, 
     dialectModule: pg,
   }
 );
@@ -17,7 +17,7 @@ const basename = path.basename(__filename);
 
 const modelDefiners = [];
 
-// Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
+// We read all the files from the Models folder, request them and add them to the modelDefiners array.
 fs.readdirSync(path.join(__dirname, "/models"))
   .filter(
     (file) =>
@@ -27,9 +27,8 @@ fs.readdirSync(path.join(__dirname, "/models"))
     modelDefiners.push(require(path.join(__dirname, "/models", file)));
   });
 
-// Injectamos la conexion (sequelize) a todos los modelos
+// Inject the connection (sequelize) to all the models
 modelDefiners.forEach((model) => model(sequelize));
-// Capitalizamos los nombres de los modelos ie: product => Product
 let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [
   entry[0][0].toUpperCase() + entry[0].slice(1),
@@ -37,11 +36,11 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-// En sequelize.models están todos los modelos importados como propiedades
-// Para relacionarlos hacemos un destructuring asi
+// In sequelize.models are all imported models as properties.
+
 const { CountryData, Activity } = sequelize.models;
 
-// Aca vendrian las relaciones
+// Relations
 CountryData.belongsToMany(Activity, {
   through: "ActivityCountry",
   timestamps: false,
@@ -51,7 +50,7 @@ Activity.belongsToMany(CountryData, {
   timestamps: false,
 });
 
-// Función para guardar todos los países en la base de datos
+// Function to store all countries in the database
 async function saveCountriesInDataBase() {
   try {
     const count = await CountryData.count(); 
@@ -60,7 +59,7 @@ async function saveCountriesInDataBase() {
       const answer = await axios.get("https://restcountries.com/v3.1/all");
       const country = answer.data;    
 
-      // Envuelve el bucle for en una función asincrónica
+     // Wraps the for loop in an asynchronous function
       await Promise.all(
         country.map(async (country) => {
           const { cca3, name, flags, capital, continents, subregion, area, population } = country;
@@ -79,17 +78,16 @@ async function saveCountriesInDataBase() {
           });
         })
       );
-
-      //console.log("Todos los países se han guardado en la base de datos.");
+     
     }
   } catch (error) {   
     console.error("Data countries not found:", error);
   }
 }
-// Llama la función para guardar todos los países en la base de datos al iniciar el servidor
+// Calls the function to save all countries in the database at server startup
 saveCountriesInDataBase();
 
 module.exports = {
-  ...sequelize.models, // para poder importar los modelos así: const { CountryData, Activity } = require('./db.js');
-  conn: sequelize, // para importart la conexión { conn } = require('./db.js');
+  ...sequelize.models, 
+  conn: sequelize, 
 };

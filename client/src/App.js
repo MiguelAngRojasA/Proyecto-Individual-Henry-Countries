@@ -7,9 +7,7 @@ import axios from "axios";
 axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() { 
-  const location = useLocation();
-
- 
+  const location = useLocation(); 
 
   return (
     <div className="App">
