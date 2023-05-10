@@ -5,7 +5,7 @@ const path = require("path");
 const { DATABASE_URL } = process.env;
 //  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_PORT}`, DB_USER, DB_PASSWORD, DB_HOST,DB_NAME,DB_PORT,
 const axios = require("axios");
-import * as pg from 'pg';
+const pg = require('pg');
 
 const sequelize = new Sequelize(DATABASE_URL,
   {
