@@ -1,12 +1,22 @@
 import React from "react";
 import style from "./Paged.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { nextPage, prevPage,handleNumber} from "../../redux/actions/actions"
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { nextPage, prevPage,handleNumber,resetPage} from "../../redux/actions/actions"
 
 
 export default function Paginate({ cantPages }) {
   const { numPage } = useSelector((state) => state);
   const dispatch = useDispatch();
+  const { search } = useLocation();
+  const query = new URLSearchParams(search).get("q");
+
+  useEffect(() => {
+    if (query) {
+      dispatch(resetPage());
+    }
+  }, [dispatch, query]);
 
   function next() {
     dispatch(nextPage());

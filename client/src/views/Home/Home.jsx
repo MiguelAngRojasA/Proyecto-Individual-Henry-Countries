@@ -2,7 +2,8 @@ import React from 'react'
 import CardContainer from '../../components/CardContainer/CardContainer'
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountries, getActivities} from '../../redux/actions/actions';
+import { getCountries, getActivities,getCountryByName ,applyFilters } from '../../redux/actions/actions';
+import { useLocation } from "react-router-dom";
 import Filter from '../../components/Filters/Filter';
 import style from './Home.module.css'
 import Paginate from "../../components/Paged/Page";
@@ -12,13 +13,35 @@ import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.jsx'
 export default function Home() {
 
   const dispatch = useDispatch();  
-  const { countryDisplayed, error } = useSelector((state) => state);
+  const { countryDisplayed, error, filters} = useSelector((state) => state);
+
+  const { search } = useLocation();
+  const location = useLocation();
+const query = new URLSearchParams(search).get("q");
   let cantPages = Math.floor(countryDisplayed.length / 10);
 
   useEffect(() => {
-    dispatch(getCountries());    
-    dispatch(getActivities());
-  }, [dispatch]);
+    const fetchData = async () => {
+      await Promise.all([
+        dispatch(getCountries()),
+        dispatch(getActivities()),
+        dispatch(applyFilters(filters))
+      ]);
+        
+      if (query) {
+        dispatch(getCountryByName(query))
+          .then(() => {
+            dispatch(applyFilters(filters));
+          });
+      } else {
+        dispatch(applyFilters(filters));
+      }
+    };
+  
+    fetchData();
+  }, [dispatch, query]);
+
+
 
   return (
     <div className={style.landing}>

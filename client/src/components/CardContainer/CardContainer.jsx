@@ -24,6 +24,7 @@ export default function CardContainer() {
                 id={element.id}
                 image={element.image}
                 name={element.name}
+                population={element.population}
                 continent={element.continent}
               ></Card>
             );

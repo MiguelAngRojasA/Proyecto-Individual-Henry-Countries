@@ -6,47 +6,49 @@ import {
   continentOrder,
   getCountries,
   activityOrder,
+  resetfilters,
 } from "../../redux/actions/actions";
 import style from "./Filter.module.css"
 
 export default function Filter() {
   const { activities } = useSelector((state) => state);
+  const { filters } = useSelector((state) => state);
+  const { alphabetic, population, continent, activity } = filters;
+
   const dispatch = useDispatch();
   const sortedActivities = activities.sort((a, b) =>
     a.name.localeCompare(b.name)
   );
 
+
   function handleAlphabeticOrder(e) {
     e.preventDefault();
-    const { value } = e.target;
+    const { value } = e.target;       
     dispatch(alphabeticOrder(value));
+    
   }
 
   function handlePopulationOrder(e) {
     e.preventDefault();
-    const { value } = e.target;
+    const { value } = e.target;   
     dispatch(populationOrder(value));
   }
 
   function handleContinentOrder(e) {
     e.preventDefault();
-    const { value } = e.target;
-    const activityValue = document.getElementById("activity-selector").value;
-    dispatch(continentOrder(value, activityValue));
+    const { value } = e.target;   
+    dispatch(continentOrder(value));
   }
 
   function handleActivitytOrder(e) {
     e.preventDefault();
-    const { value } = e.target;
+    const { value } = e.target;     
     dispatch(activityOrder(value));
   }
 
   function resetBtton() {
     dispatch(getCountries());
-    document.getElementById("alphabetic-selector").selectedIndex = 0;
-    document.getElementById("population-selector").selectedIndex = 0;
-    document.getElementById("continent-selector").selectedIndex = 0;
-    document.getElementById("activity-selector").selectedIndex = 0;
+    dispatch (resetfilters());
   }
   return (    
     <div className={style.filterContainer}>
@@ -55,7 +57,7 @@ export default function Filter() {
         id="alphabetic-selector"
         onChange={handleAlphabeticOrder}
         name="Alphabetic"
-        defaultValue={"DEFAULT"}
+        value={alphabetic}
       >
         <option value="DEFAULT" disabled={true}>
           Select Order
@@ -68,7 +70,7 @@ export default function Filter() {
         id="population-selector"
         onChange={handlePopulationOrder}
         name="Population"
-        defaultValue={"DEFAULT"}
+        value={population}
       >
         <option value="DEFAULT" disabled={true}>
           Select Order
@@ -81,7 +83,7 @@ export default function Filter() {
         id="continent-selector"
         onChange={handleContinentOrder}
         name="Continent"
-        defaultValue={"DEFAULT"}
+        value={continent}
       >
         <option value="DEFAULT" disabled={true}>
           Select continent
@@ -99,7 +101,7 @@ export default function Filter() {
         id="activity-selector"
         name="activity"
         onChange={handleActivitytOrder}
-        defaultValue=""
+        value={activity}
       >
         <option value="" disabled>
           Select an activity

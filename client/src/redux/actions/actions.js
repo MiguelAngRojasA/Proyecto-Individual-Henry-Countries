@@ -10,7 +10,13 @@ import {
   PREV_PAGE, 
   NEXT_PAGE,
   HANDLE_NUMBER,
-  FAILURE, 
+  FAILURE,
+  RESET_PAGE,
+  SET_FILTER_STATE_POPU,
+  SET_FILTER_STATE_ALPHA,
+  SET_FILTER_STATE_ACTI,
+  SET_FILTER_STATE_CONTINENT,
+
 } from "./types";
 import axios from "axios";
 
@@ -159,20 +165,25 @@ export function updateCountryDisplay(countriesDisplayed) {
 }
 
 export const alphabeticOrder = (order) => {
+
   return (dispatch, getState) => {
     const countries = getState().countryDisplayed;
 
     const newOrder = countries.sort((a, b) => {
-      const compareResult = a.name.localeCompare(b.name, 'en', {sensitivity: 'base'});
-      if (compareResult > 0) {
+      const compareResult = a.name.localeCompare(b.name, 'en', {sensitivity: 'base'});      
+      if (compareResult > 0) {       
         return order === "A-Z" ? 1 : -1;
+       
       }
       if (compareResult < 0) {
         return order === "Z-A" ? 1 : -1;
       }
+      
       return 0;
     });
+    
     dispatch({ type: UPDATE_COUNTRY_DISPLAY, payload: newOrder });
+    dispatch({ type: SET_FILTER_STATE_ALPHA, payload: { alphabetic: order } });
   };
 };
 
@@ -182,38 +193,42 @@ export const populationOrder = (order) => {
 
     const newOrder = countries.sort((a, b) => {
       if (a.population > b.population) {
-        return order === "Descendente" ? 1 : -1;
+        return order === "Ascendente" ? 1 : -1;
       }
       if (a.population < b.population) {
-        return order === "Ascendente" ? 1 : -1;
+        return order === "Descendente" ? 1 : -1; 
       }
       return 0;   
     });
     dispatch({ type: UPDATE_COUNTRY_DISPLAY, payload: newOrder });
+    dispatch({ type: SET_FILTER_STATE_POPU, payload: { population: order } });
   };
 };
 
-export const continentOrder = (continent, activityName) => {
+export const continentOrder = (continent) => {
   return (dispatch, getState) => {    
     let filteredCountries = getState().countries;
+    let { filters } = getState();
+    let {activity}=filters;
     
     if (continent) {
       filteredCountries = filteredCountries.filter(country => country.continent === continent);
     }
 
-    if (activityName) {
+    if (activity) {
       filteredCountries = filteredCountries.filter(country => {
-        return country.Activities.some(Activity => Activity.name.toLowerCase().includes(activityName.toLowerCase()))
+        return country.Activities.some(Activity => Activity.name.toLowerCase().includes(activity.toLowerCase()))
       });
     }
-
+    dispatch({ type: SET_FILTER_STATE_CONTINENT, payload: { continent: continent} });
     dispatch({ type: UPDATE_COUNTRY_DISPLAY, payload: filteredCountries });
   };
 };
 
 export const activityOrder = (name) => {
   return (dispatch, getState) => {
-    const { selectedContinent } = getState();
+    const { filters } = getState();
+    let {continent}=filters;
     let filteredCountries = [];
 
     if (name) {
@@ -222,9 +237,10 @@ export const activityOrder = (name) => {
       });
     }
 
-    if (selectedContinent) {
-      filteredCountries = filteredCountries.filter(country => country.continent === selectedContinent);
+    if (continent!=="DEFAULT") {
+      filteredCountries = filteredCountries.filter(country => country.continent === continent);
     }
+    dispatch({ type: SET_FILTER_STATE_ACTI, payload: { activity: name} });
     dispatch({ type: UPDATE_COUNTRY_DISPLAY, payload: filteredCountries });
   };
 };
@@ -246,3 +262,38 @@ export function handleNumber(num) {
     payload: num,
   };
 }
+
+export const resetPage = () => ({
+  type: RESET_PAGE,
+});
+
+export const applyFilters = (filters) => {
+  return (dispatch) => {
+    const { alphabetic, population, continent, activity } = filters;
+
+    if (alphabetic !== "DEFAULT") {
+      dispatch(alphabeticOrder(alphabetic));    
+    }
+
+    if (population !== "DEFAULT") {
+      dispatch(populationOrder(population));
+    }
+
+    if (continent !== "DEFAULT") {
+      dispatch(continentOrder(continent));
+    }
+
+    if (activity !== "") {
+      dispatch(activityOrder(activity));
+    }    
+  };
+};
+
+export const resetfilters = () => {
+  return (dispatch) => {
+    dispatch({ type: SET_FILTER_STATE_POPU, payload: { population: "DEFAULT" } });
+    dispatch({ type: SET_FILTER_STATE_ALPHA, payload: { alphabetic: "DEFAULT" } });
+    dispatch({ type: SET_FILTER_STATE_CONTINENT, payload: { continent: "DEFAULT" } });
+    dispatch({ type: SET_FILTER_STATE_ACTI, payload: { activity: "" } });
+  }
+};

@@ -2,6 +2,7 @@ import { useState } from "react";
 import style from "./SearchBar.module.css";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 import { getCountryByName, getCountries } from "../../redux/actions/actions";
 
 export default function SearchBar() {
@@ -15,10 +16,11 @@ export default function SearchBar() {
 
   function submit(event) {
     event.preventDefault();
-    navigate("/home");
     if (!countryName) {
+      navigate("/home");
       dispatch(getCountries());
     } else {
+      navigate(`/home?q=${countryName}`);
       dispatch(getCountryByName(countryName));
     }
   }

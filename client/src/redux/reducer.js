@@ -9,8 +9,14 @@ import {
   GET_ACTIVITIES,
   PREV_PAGE, 
   NEXT_PAGE,
-  HANDLE_NUMBER, 
-  FAILURE  
+  HANDLE_NUMBER,
+  RESET_PAGE, 
+  FAILURE,
+  SET_FILTER_STATE_ALPHA,
+  SET_FILTER_STATE_POPU,
+  SET_FILTER_STATE_ACTI,
+  SET_FILTER_STATE_CONTINENT,
+
 } from "./actions/types";
 
 const initialState = {
@@ -22,6 +28,13 @@ const initialState = {
   numPage: 1,
   error: {
     countryNotFound: "",
+  },
+  filters:{
+    alphabetic:"DEFAULT",
+    population:"DEFAULT",
+    continent:"DEFAULT",
+    activity:""
+
   }
 };
 
@@ -108,6 +121,12 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         numPage: state.numPage - 1,
       };
+
+      case RESET_PAGE:
+  return {
+    ...state,
+    numPage: 1,
+  };
       
       case FAILURE:
       
@@ -118,6 +137,42 @@ export default function rootReducer(state = initialState, { type, payload }) {
           countryNotFound: payload,
         },
       }
+
+      case SET_FILTER_STATE_ALPHA:
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          alphabetic: payload.alphabetic,
+        }
+      };
+      
+      case SET_FILTER_STATE_POPU:
+        return {
+          ...state,
+          filters: {
+            ...state.filters,
+            population: payload.population,
+          }
+        };
+
+        case SET_FILTER_STATE_CONTINENT:
+          return {
+            ...state,
+            filters: {
+              ...state.filters,
+              continent: payload.continent,
+            }
+          };
+
+          case SET_FILTER_STATE_ACTI:
+            return {
+              ...state,
+              filters: {
+                ...state.filters,
+                activity: payload.activity,
+              }
+            };
 
     default:
       return state;
